@@ -1,16 +1,17 @@
 # ECS 171 Group 1 Project
 
 Groupmembers: Jade Elkins, Braxton Husserl, Victor Lai, Minh Giang Tran, Chuan Hsin Wang, Martin Wong
+Dataset: https://www.kaggle.com/datasets/whenamancodes/real-or-fake-jobs
 
 # Abstract
-### Being able to differentiate between real and fake job postings would decrease the risk of applying for scam positions, leaving more time to apply for real, potential job offerings. We are planning on using a natural language processing scheme such as a recurrent neural network or transformer to predict whether the job listing is fraudulent or not. This dataset should give us a greater understanding of how to build models that work on natural language data.
-
-### Dataset: https://www.kaggle.com/datasets/whenamancodes/real-or-fake-jobs
-
-### Description: The dataset contains 18k job descriptions, 800 of which are fake. It contains eighteen different features including job title, job description, salary, industry, and whether they are fraudulent or not.
+### One way scammers target the vunerable is with fake job postings. Those that accept these fake job positings are at risk of revealing their personal information to nefarious groups. An algorithm which could detect and remove these scams from job postings websites would be useful. Using a dataset which contains over 18,000 job descriptions, of which 800 are fake, we created a few machine learning models to predict whether they are fradulent. Since the data is mostly made up of natural language sentences, the data first needed to be cleaned and tokenized. This was done by setting all words to lowercase, removing punctuation and common shortwords, and then converting each string to an array of numerical values representing words. A neural network which was created and trained using only the company_profile column achieved the greatest overall accuracy of approximately 96%. 
 
 # Background
+### Being able to differentiate between real and fake job postings would decrease the risk of applying for scam positions, leaving more time to apply for real, potential job offerings. The dataset contains 18k job descriptions, 800 of which are fake. It contains eighteen different features including job title, job description, salary, industry, and whether they are fraudulent or not. This excercise will give us a greater understanding of how to build models that work on natural language data.
+
 # Introduction
+### We are planning on using a natural language processing scheme such as a recurrent neural network or transformer to predict whether the job listing is fraudulent or not.
+
 ## Data Exploration
 ### We first imported the data and printed the first 5 rows of the data in order to check if we imported the correct dataset. We then check for NAN/Null values within our dataset. We see that 12 of the 18 columns contain at least 1 NaN value within it. We decided to replace the NaN values with empty strings over dropping the rows and columns with NaN. We didn’t drop any of the rows with NaN because we would be dropping at least over 15,000 of the 17,880 observations we would have. Dropping columns of our dataset would result in a shrinkage of our dataset of over 83%. Replacing the NaN values with empty strings would allow us to still utilize the columns and observations without needing to remove a majority of the data.
 
