@@ -26,9 +26,23 @@ Dataset: https://www.kaggle.com/datasets/whenamancodes/real-or-fake-jobs
 
 ### Word2Vec + LSTM
 - the another way to convert the string is using Word2Vec, which will convert each word to a vector. The words has similar meaning will near to each other in the space, and the vector's direction will show the relationship of words
+```
+# initialize & training our word2vec model
+w2v_model = gensim.models.Word2Vec(sentence,min_count=1,size=100)
+```
 - because we are going to add embedding layer in the model, so we need to create a convert matrix which will use in embedding layer
 - to create the convert matrix, we need to first using tokenizer to convert each word to a number (ex. and -> 1, the -> 2, to -> 3.etc)
 - and the `get_weight_matrix` function will create a matrix which map 1->the vector which  word "and" being convert by word2vec mode
+```
+# mapped the word's index (by tokenizer) to the word's vector (by word2vec model)
+def get_weight_matrix(model, vocab):
+    vocab_size = len(vocab) + 1
+    weight_matrix = np.zeros((vocab_size, EMBEDDING_DIM))
+    for word, i in vocab.items():
+        weight_matrix[i] = model.wv[word]
+    return weight_matrix
+
+```
 
 
 # Methodology
