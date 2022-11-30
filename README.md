@@ -24,6 +24,13 @@ Dataset: https://www.kaggle.com/datasets/whenamancodes/real-or-fake-jobs
 
 ### We tokenized our dataset which help make language preprocessing easier when using a neural network model. Tokenizing helps break larger phrases into smaller chunk for better analysis for sequence or patterns of words.
 
+### Word2Vec + LSTM
+- the another way to convert the string is using Word2Vec, which will convert each word to a vector. The words has similar meaning will near to each other in the space, and the vector's direction will show the relationship of words
+- because we are going to add embedding layer in the model, so we need to create a convert matrix which will use in embedding layer
+- to create the convert matrix, we need to first using tokenizer to convert each word to a number (ex. and -> 1, the -> 2, to -> 3.etc)
+- and the `get_weight_matrix` function will create a matrix which map 1->the vector which  word "and" being convert by word2vec mode
+
+
 # Methodology
 ### In developing the model we used the tokenized data to create values for each word. This allows each word in the neural network to have a weight and value when being passed into the model. We first tokenize the description columns so each word within the column would have a value associated with the word. For example, the word the would have a value of 1 so any the in the column would be replaced with 1. We then pad each row of the column with a certain length of 500 to ensure each row has the same length when passed as inputs to the neural network. We would then split the split the description data into training and testing data where 20 percent of the data would be allocated to testing. The last 80 would be used for training the model. We would do the same preprocessing method for company profile column. We would tokenize and assign values to each unique word while padding the length of each row size to be 500. The data would similarly be split to the description data in a 80 to 20 ratio.
 
