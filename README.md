@@ -78,8 +78,9 @@ def get_weight_matrix(model, vocab):
 
 
 # Results
-We would see that the description yielded a 95.7% accuracy while the company profile yielded a 93.5%
+### Within testing the description model we were able to yield high accuracy, recall, precision, and f1-score. In the description model we have a 96% accuracy, 100% recall, 98% f1-score and 96% precision. The testing for the company profile model resulted in similar results where 96% accuracy, 100% recall, 98% f1-score and 96% precision. Both these models had similar accuracy, recall, f1-score, and precision to their respective training model.
 
+### To increase the models classification score, we decided to oversample and undersample the dataset for a model.
 # Discussion
 The description and company profile neural network models have a very low recall for fraudulent predictions, this implies that their high accuracy is a result of prediciting non-fradulent nearly every time. In fact, these models correctly predicted fradulent with an accuracy of less than 10%. This could be due to the comparitvely small amount of fraudulent entries there are to train on since the dataset consists of 95% true job entries. 
 
