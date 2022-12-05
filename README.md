@@ -95,9 +95,10 @@ After oversample the fradulent entires, we can get 1.0 recall and 0.99 accuracy,
 Also we can choose undersample the non-fradulent data, we remove the observation with Nan value first before we oversample it, at first it seens not has good accuracy, but with more epoch to fit train model, it also get goof outcome.
 
 |  LSTM model + remove Nan observation     | only tokenized + 6 epoches | using Word2Vec + 6 epoches | only tokenized  + 60 epoches | Word2Vec  + 60 epoches |
-| -------------- ------------------------  | -------------------------- | -------------------------- | ---------------------------- | ---------------------- |
+| ---------------------------------------  | -------------------------- | -------------------------- | ---------------------------- | ---------------------- |
 | recall                                   | 0.76                       | 0.60                       | 0.98                         | 1.0                    |
 | accuracy                                 | 0.78                       | 0.63                       | 0.93                         | 0.95                   |
+
 
 # Conclusion
 We were able to achieve great accuracy with no noticable overfitting while only taking into account the job description, this suprised me since I cannot decern between the fradulent jobs myself. It wasn't untill after investigating further that I realized why, since our dataset is over 95% non-fraudulent entries, the model could simply predict non-fraudulent in every case and achieve a 95% accuracy. In fact, that is exactly what it did, seeing as the description based model only classified a single observation as fraudulent in the entire test set. The question of course is, how can we fix this problem? 
