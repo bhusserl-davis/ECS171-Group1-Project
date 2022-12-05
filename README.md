@@ -93,10 +93,10 @@ The description and company profile neural network models have a very low recall
 Using Word2Vec to do string embedding achieved a much higher recall for fradulent entires, because word2Vec will consider about the word's meaning to encode the word, so we can know that Word2Vec is a better way to encode.
 After oversample the fradulent entires, we can get 1.0 recall and 0.99 accuracy, also the one only tokenized the string can get much higher recall, so that the most important thing is to balance our datasets.
 
-|  LSTM model      | only tokenized | using Word2Vec | only tokenized | Word2Vec + oversample |
-| ---------------  | -------------- | -------------- | -------------- | --------------------- |
-| recall           | 0.1            | 0.5            | 0.97           | 1.0                   |
-| accuracy         | 0.95           | 0.97           | 0.89           | 0.99                  |
+|  LSTM model      | only tokenized | using Word2Vec | only tokenized + oversample | Word2Vec + oversample |
+| ---------------  | -------------- | -------------- | --------------------------- | --------------------- |
+| recall           | 0.1            | 0.5            | 0.97                        | 1.0                   |
+| accuracy         | 0.95           | 0.97           | 0.89                        | 0.99                  |
 
 # Conclusion
 We were able to achieve great accuracy with no noticable overfitting while only taking into account the job description, this suprised me since I cannot decern between the fradulent jobs myself. It wasn't untill after investigating further that I realized why, since our dataset is over 95% non-fraudulent entries, the model could simply predict non-fraudulent in every case and achieve a 95% accuracy. In fact, that is exactly what it did, seeing as the description based model only classified a single observation as fraudulent in the entire test set. The question of course is, how can we fix this problem? The second model which utlized a LSTM layer and did not remove the most common words such as "and", "the", and "to" had a much higher success for predicting fraudulent entries, implying that these common words are actually very important. The ratio of fraudulent to non-fraudulent entries in the dataset also greatly contributed to the model's bias. If this problem is tackled again, two things to keep in mind are to utilize a much more balanced dataset, either with more fraudulent examples or with a more even ratio, and to keep in common stopwords from the data.
