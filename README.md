@@ -78,7 +78,6 @@ def get_weight_matrix(model, vocab):
 
 
 # Results
-<<<<<<< HEAD
 ### Within testing the description model we were able to yield high accuracy, recall, precision, and f1-score. In the description model we have a 96% accuracy, 100% recall, 98% f1-score and 96% precision. The testing for the company profile model resulted in similar results where 96% accuracy, 100% recall, 98% f1-score and 96% precision. Both these models had similar accuracy, recall, f1-score, and precision to their respective training model.
 
 ### In the table below are the results from our five main models. For each, the recall on the fraudulent class as well as overall accuracy are listed.
