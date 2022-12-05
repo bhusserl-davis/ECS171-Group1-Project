@@ -89,7 +89,7 @@ In the table below are the results from our five main models. For each, the reca
 | accuracy | 0.96                         | 0.95                             | 0.97           | 0.95                   | 0.99                   |
 >>>>>>> 2b9b2970ce6b0ecf0e616076764b6aecc033e55c
 
-### To increase the models classification score, we decided to oversample and undersample the dataset for a model. In the table above, as a result of oversampling the data which increased the amount of false jobs allowed for the model to reach a higher accuracy score.
+### To increase the models classification score, we decided to oversample and undersample the dataset for a model. In the table above, as a result of oversampling the data which increased the amount of false jobs allowed for the model to reach a higher accuracy score. We also tried undersampling the data to understand the influence it would have on our model. Upon undersampling the model we yielded a slightly lower accuracy and this could have happened as a result of lessening our data.
 # Discussion
 The description and company profile neural network models have a very low recall for fraudulent predictions, this implies that their high accuracy is a result of prediciting non-fradulent nearly every time. In fact, these models correctly predicted fradulent entries with less than 10% success. This could be due to the comparatively small amount of fraudulent entries there are to train on since the dataset consists of 95% true job entries. 
 
