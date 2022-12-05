@@ -110,3 +110,7 @@ This shows that the amount of training data is also important, but if we don't h
 We were able to achieve great accuracy with no noticable overfitting while only taking into account the job description, this suprised me since I cannot decern between the fradulent jobs myself. It wasn't untill after investigating further that I realized why, since our dataset is over 95% non-fraudulent entries, the model could simply predict non-fraudulent in every case and achieve a 95% accuracy. In fact, that is exactly what it did, seeing as the description based model only classified a single observation as fraudulent in the entire test set. The question of course is, how can we fix this problem? 
 
 The model which utlized a LSTM layer and word2Vec to enocode data had a much higher success for predicting fraudulent entries, implying the way data is encoded is actually very important. The ratio of fraudulent to non-fraudulent entries in the dataset also greatly contributed to the model's bias. After we oversampled the fraudulent data to make our dataset more balanced, the recall was significantly improved. This result shows that the balance of the data is very important.
+
+# reference
+- https://www.kaggle.com/code/kumbaraci/text-classification
+- https://www.kaggle.com/code/atishadhikari/fake-news-cleaning-word2vec-lstm-99-accuracy
