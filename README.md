@@ -12,7 +12,7 @@ Victor Lai: Coding for Data Visualization, Writer
 
 Minh Giang Tran:
 
-Chuan Hsin Wang: Coding for Word2Vec Model, Writer
+Chuan Hsin Wang: Coding for LSTM Model and string embedding, Writer
 
 Martin Wong: Coding for Description/Company Profile Model, Writer
 
@@ -47,7 +47,7 @@ from imblearn.over_sampling import RandomOverSampler
 oversample = RandomOverSampler(sampling_strategy='minority')
 X_over, y_over = oversample.fit_resample(X, y)
 ```
-![alt text](https://github.com/bhusserl-davis/ECS171-Group1-Project/blob/main/Images/wordCloud.png?raw=true)
+![alt text](https://github.com/bhusserl-davis/ECS171-Group1-Project/blob/main/Images/char_after_oversample.png?raw=true)
 
 
 ## Neural Network On Description And Company Profile
@@ -89,9 +89,14 @@ def get_weight_matrix(model, vocab):
 We would see that the description yielded a 95.7% accuracy while the company profile yielded a 93.5%
 
 # Discussion
-The description and company profile neural network models have a very low recall and f1-score for fraudulent predictions, this implies that their high accuracy is a result of prediciting non-fradulent nearly every time. In fact, these models correctly predicted fradulent with an accuracy of less than 10%. This could be due to the comparitvely small amount of fraudulent entries there are to train on since the dataset consists of 95% true job entries. 
+The description and company profile neural network models have a very low recall for fraudulent predictions, this implies that their high accuracy is a result of prediciting non-fradulent nearly every time. In fact, these models correctly predicted fradulent with an accuracy of less than 10%. This could be due to the comparitvely small amount of fraudulent entries there are to train on since the dataset consists of 95% true job entries. 
+Using Word2Vec to do string embedding achieved a much higher recall for fradulent entires, because word2Vec will consider about the word's meaning to encode the word, so we can know that Word2Vec is a better way to encode.
+After oversample the fradulent entires, we can get 1.0 recall and 0.99 accuracy, also the one only tokenized the string can get much higher recall, so that the most important thing is to balance our datasets.
 
-The Word2Vec model achieved a much higher recall and f1-score for fradulent entires, suggesting this is a much better rounded model. One big difference in the creation of this model was including stopwords, so its possible that stopwords are more important in predicting fraudulent descriptions than initally thought. 
+|  LSTM model      | only tokenized | using Word2Vec | only tokenized | Word2Vec + oversample |
+| ---------------  | -------------- | -------------- | -------------- | --------------------- |
+| recall           | 0.1            | 0.5            | 0.97           | 1.0                   |
+| accuracy         | 0.95           | 0.97           | 0.89           | 0.99                  |
 
 # Conclusion
 We were able to achieve great accuracy with no noticable overfitting while only taking into account the job description, this suprised me since I cannot decern between the fradulent jobs myself. It wasn't untill after investigating further that I realized why, since our dataset is over 95% non-fraudulent entries, the model could simply predict non-fraudulent in every case and achieve a 95% accuracy. In fact, that is exactly what it did, seeing as the description based model only classified a single observation as fraudulent in the entire test set. The question of course is, how can we fix this problem? The second model which utlized a LSTM layer and did not remove the most common words such as "and", "the", and "to" had a much higher success for predicting fraudulent entries, implying that these common words are actually very important. The ratio of fraudulent to non-fraudulent entries in the dataset also greatly contributed to the model's bias. If this problem is tackled again, two things to keep in mind are to utilize a much more balanced dataset, either with more fraudulent examples or with a more even ratio, and to keep in common stopwords from the data.
