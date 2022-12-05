@@ -90,8 +90,10 @@ We would see that the description yielded a 95.7% accuracy while the company pro
 
 # Discussion
 The description and company profile neural network models have a very low recall for fraudulent predictions, this implies that their high accuracy is a result of prediciting non-fradulent nearly every time. In fact, these models correctly predicted fradulent with an accuracy of less than 10%. This could be due to the comparitvely small amount of fraudulent entries there are to train on since the dataset consists of 95% true job entries. 
-Using Word2Vec to do string embedding achieved a much higher recall for fradulent entires, because word2Vec will consider about the word's meaning to encode the word, so we can know that Word2Vec is a better way to encode.
-After oversample the fradulent entires, we can get 1.0 recall and 0.99 accuracy, also the one only tokenized the string can get much higher recall, so that the most important thing is to balance our datasets.
+
+Using Word2Vec to do string embedding achieved a much higher recall for fradulent entires, because word2Vec will consider about the word's meaning to encode the word, so we can know that Word2Vec is a better way to encode. 
+
+After oversample the fradulent entires, we can get 1.0 recall and 0.99 accuracy, also the one only tokenized the string can get much higher recall, so that the most important thing is to balance our datasets. 
 
 |  LSTM model      | only tokenized | using Word2Vec | only tokenized + oversample | Word2Vec + oversample |
 | ---------------  | -------------- | -------------- | --------------------------- | --------------------- |
