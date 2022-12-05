@@ -80,14 +80,14 @@ def get_weight_matrix(model, vocab):
 # Results
 <<<<<<< HEAD
 ### Within testing the description model we were able to yield high accuracy, recall, precision, and f1-score. In the description model we have a 96% accuracy, 100% recall, 98% f1-score and 96% precision. The testing for the company profile model resulted in similar results where 96% accuracy, 100% recall, 98% f1-score and 96% precision. Both these models had similar accuracy, recall, f1-score, and precision to their respective training model.
-=======
-In the table below are the results from our five main models. For each, the recall on the fraudulent class as well as overall accuracy are listed.
+
+### In the table below are the results from our five main models. For each, the recall on the fraudulent class as well as overall accuracy are listed.
 
 |  Metric  | only tokenized (Description) | only tokenized (company_profile) | using Word2Vec | Word2Vec + undersample | Word2Vec + oversample  |
 | ------   | ---------------------------- | -------------------------------- | -------------- | ---------------------- | ---------------------- |
 | recall   | 0.01                         | 0.09                             | 0.5            | 1.0                    | 1.0                    |
 | accuracy | 0.96                         | 0.95                             | 0.97           | 0.95                   | 0.99                   |
->>>>>>> 2b9b2970ce6b0ecf0e616076764b6aecc033e55c
+<!-- >>>>>>> 2b9b2970ce6b0ecf0e616076764b6aecc033e55c -->
 
 ### To increase the models classification score, we decided to oversample and undersample the dataset for a model. In the table above, as a result of oversampling the data which increased the amount of false jobs allowed for the model to reach a higher accuracy score. We also tried undersampling the data to understand the influence it would have on our model. Upon undersampling the model we yielded a slightly lower accuracy and this could have happened as a result of lessening our data.
 # Discussion
