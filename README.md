@@ -23,6 +23,7 @@ One way scammers target the vunerable is with fake job postings. Those that appl
 # Methods
 ## Data Exploration
 ![alt text](https://github.com/bhusserl-davis/ECS171-Group1-Project/blob/main/Images/wordCloud.png?raw=true)
+![alt text](https://github.com/bhusserl-davis/ECS171-Group1-Project/blob/main/Images/realvsfraudulentfrequency.png?raw=true)
 
 We first imported the data and printed the first 5 rows of the data in order to check if we imported the correct dataset. We then check for NAN/Null values within our dataset. We see that 12 of the 18 columns contain at least 1 NaN value within it. We decided to replace the NaN values with empty strings over dropping the rows and columns with NaN. We didn’t drop any of the rows with NaN because we would be dropping at least over 15,000 of the 17,880 observations we would have. Dropping columns of our dataset would result in a shrinkage of our dataset of over 83%. Replacing the NaN values with empty strings would allow us to still utilize the columns and observations without needing to remove a majority of the data.
 
