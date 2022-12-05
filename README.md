@@ -90,19 +90,19 @@ The description and company profile neural network models have a very low recall
 
 Using Word2Vec to do string embedding achieved a much higher recall for fradulent entires, because word2Vec takes into account the word's meaning to encode the word, this shows that Word2Vec is a better way to encode. 
 
-After oversampling the fradulent entires, we can get 1.0 recall on the fradulent class and 0.99 overall accuracy. The model which only tokenized the string and oversampled (no Word2Vec) also got a high recall, this implies that the most important thing is to balance our datasets. 
+After oversampling the fradulent entires, we can get 0.6 recall on the fradulent class and 0.98 overall accuracy. The model which only tokenized the string and oversampled (no Word2Vec) also got a high recall, this implies that the most important thing is to balance our datasets. 
 
 |  LSTM model      | only tokenized | using Word2Vec | only tokenized + oversample | Word2Vec + oversample |
 | ---------------  | -------------- | -------------- | --------------------------- | --------------------- |
-| recall           | 0.1            | 0.5            | 0.97                        | 1.0                   |
-| accuracy         | 0.95           | 0.97           | 0.89                        | 0.99                  |
+| recall           | 0.01           | 0.5            | 0.51                        | 0.6                   |
+| accuracy         | 0.95           | 0.97           | 0.89                        | 0.98                  |
 
 We can also choose to undersample the non-fradulent data, we remove the observations with NaN value first before we oversample it. Initally it seens to produce poor accuracy, but after more epochs it also achieves high accuracy and recall.
 
 |  LSTM model + remove Nan observation     | only tokenized + 6 epoches | using Word2Vec + 6 epoches | only tokenized  + 60 epoches | Word2Vec  + 60 epoches |
 | ---------------------------------------  | -------------------------- | -------------------------- | ---------------------------- | ---------------------- |
-| recall                                   | 0.76                       | 0.60                       | 0.98                         | 1.0                    |
-| accuracy                                 | 0.78                       | 0.63                       | 0.93                         | 0.95                   |
+| recall                                   | 0.76                       | 0.60                       | 0.79                         | 0.67                    |
+| accuracy                                 | 0.78                       | 0.63                       | 0.93                         | 0.93                   |
 
 This shows that the amount of training data is also important, but if we don't have enough data, we can use more training epochs to make up for it.
 
