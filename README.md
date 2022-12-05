@@ -14,7 +14,7 @@ Minh Giang Tran: Coding for Data Visualization
 
 Chuan Hsin Wang: Coding for LSTM Model and string embedding, Writer
 
-Martin Wong: Coding for Description/Company Profile Model, Writer
+Martin Wong: Coding for Description/Company Profile Model, Clean Nan, Writer
 
 
 # Abstract
