@@ -48,8 +48,12 @@ The next step was building a model. We started the first model to be relatively 
 
 The model would then be fitted using the description data and the company profile data. The two models would then predict the class based on the x_test adata and the outputted result would be converted to binary values with a threshold of 0.5 because the y_test consists of binary values. We then printed the accuracy and classification report for description and company profile data.
 
-## Word2Vec Model With LSTM
+## LSTM Model With different way to encode the string
 - In this model we elected not to remove common stopwords such as "and", "the", and "to".
+### 1. only tokenized the string
+### 2. one-hot encoding
+- convert each word into one-hot encoding, got similer outcome as only tokenized the string
+### 3. word2Vec
 - the another way to convert the string is using Word2Vec, which will convert each word to a vector. The words has similar meaning will near to each other in the space, and the vector's direction will show the relationship of words
 ```
 # initialize & training our word2vec model
@@ -68,6 +72,9 @@ def get_weight_matrix(model, vocab):
     return weight_matrix
 
 ```
+### 4. TFIDF
+- TFIDF is mean how important this word is in the text, so it will convert each word into a value
+
 
 # Results
 We would see that the description yielded a 95.7% accuracy while the company profile yielded a 93.5%
