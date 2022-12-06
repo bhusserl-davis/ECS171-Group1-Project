@@ -66,7 +66,7 @@ w2v_model = gensim.models.Word2Vec(sentence,min_count=1,size=100)
 ```
 
 ### RNN v.s. LSTM
-When we considering the meaning behind a sentence, to consider each word of the sentence in isolation is not enough, we need to take into account the whole context and the relationship between the words. A normal NN can only deal with each input at a time. RNN will be based on the new information and the previous output to generate new outcome, but it cannot remember the information that was outputed before that.
+When we consider the meaning behind a sentence, to consider each word of the sentence in isolation is not enough, we need to take into account the whole context and the relationships between the words (how they connect to each other). A normal NN can only deal with each input at a time. RNN will be based on new information and the previous output to generate new output, but it does not keep track of the information that was outputed before that.
 LTSM is a special kind of Recurrent Neural Network(RNN), in that it will learn what information needs to be saved, and what should be forgotten.
 ```
 #Defining Neural Network
@@ -91,7 +91,7 @@ def get_weight_matrix(model, vocab):
  
 embedding_vectors = get_weight_matrix(w2v_model, word_index)
 ```
-In the second layer, we tried RNN layer and LTSM, in both model we use 128 units.
+In the second layer, we tried RNN layer and LTSM, in both models we use 128 units.
 In the third layer, we use sigmoid as our activation function to output the probability as an output before thresholding our final answer.
 
 
