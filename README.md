@@ -100,8 +100,8 @@ In the table below are the results from our five main models. For each, the reca
 
 |  Metric   | only tokenized (Description) | only tokenized (company_profile) | oversample + Word2Vec | oversample + Word2Vec + RNN | oversample + Word2Vec + LTSM |
 | ------     | ---------------------------- | ------------------------------- | --------------------- | --------------------------- | --------------------------- |
-| recall (0) | 1.00                         | 1.00                            | 0.93                  | 0.62                        | 0.66 |
-| recall (1) | 0.00                         | 0.04                            | 0.51                  | 0.97                        | 0.98 |
+| recall (0) | 1.00                         | 1.00                            | 0.93                  | 0.97                        | 0.98 |
+| recall (1) | 0.00                         | 0.04                            | 0.51                  | 0.62                        | 0.66 |
 | accuracy   | 0.96                         | 0.96                            | 0.92                  | 0.98                        | 0.99 |
 
 
