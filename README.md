@@ -10,7 +10,7 @@ Braxton Husserl: Coding for Data Exploration and Preproccessing, Writer
 
 Victor Lai: Coding for Data Visualization, Writer
 
-Minh Giang Tran: Coding for Data Visualization
+Minh Giang Tran: Coding for Data Visualization Results, Writer
 
 Chuan Hsin Wang: Coding for LSTM Model and string embedding, Writer
 
