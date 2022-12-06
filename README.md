@@ -59,15 +59,15 @@ The model would then be fitted using the description data and the company profil
 
 ## LSTM Model With word2Vec to encode the string
 ### Word2Vec encoding
-ch will convert each word to a vector. The words has similar meaning will near to each other in the space, and the vector's direction will show the relationship of words
+The idea is that we will convert each word to a vector. Words with similar meaning will be near each other in space, and a vector's direction will show the relationship between words.
 ```
-# initialize & training our word2vec model
+# we initialize & train our word2vec model with...
 w2v_model = gensim.models.Word2Vec(sentence,min_count=1,size=100)
 ```
 
 ### RNN v.s. LSTM
-When we understand the meaning of a sentence, to understand each word of the sentence in isolation is not enough, we need to deal with the whole context and how those word connected. Normal NN can only deal with each input at a time. RNN will base on the new information and last time's outcome to generate new outcome, but it cannot remember the information that is too long ago.
-LTSM is a special kind of Recurrent Neural Network(RNN), LTSM will learn what information need to save, and what should forget.
+When we considering the meaning behind a sentence, to consider each word of the sentence in isolation is not enough, we need to take into account the whole context and the relationship between the words. A normal NN can only deal with each input at a time. RNN will be based on the new information and the previous output to generate new outcome, but it cannot remember the information that was outputed before that.
+LTSM is a special kind of Recurrent Neural Network(RNN), in that it will learn what information needs to be saved, and what should be forgotten.
 ```
 #Defining Neural Network
 model = Sequential()
@@ -78,10 +78,10 @@ model.add(LSTM(units=128))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
 ```
-The first layer of the model is embedding layer, we create a convert matrix,  to covert tokennize to vector( we already use tokenizer to convert each word to a number (ex. and -> 1, the -> 2, to -> 3.etc). 
-The `get_weight_matrix` function will create a matrix which map 1->the vector which  word "and" being convert by word2vec model.
+The first layer of the model is the embedding layer, we create a convert matrix,  to covert what we've tokennized to different vectors ( at this point, we have already use tokenized each word to a number (ex. and -> 1, the -> 2, to -> 3.etc). 
+The `get_weight_matrix` function will create a matrix which maps 1 -> the vector which  word "and" being convert by word2vec model.
 ```
-# mapped the word's index (by tokenizer) to the word's vector (by word2vec model)
+# we map the word's index (by tokenizer) to the word's vector (by word2vec model)
 def get_weight_matrix(model, vocab):
     vocab_size = len(vocab) + 1
     weight_matrix = np.zeros((vocab_size, EMBEDDING_DIM))
@@ -92,7 +92,7 @@ def get_weight_matrix(model, vocab):
 embedding_vectors = get_weight_matrix(w2v_model, word_index)
 ```
 In the second layer, we tried RNN layer and LTSM, in both model we use 128 units.
-In the third layer, we use sigmoid as our activation function.
+In the third layer, we use sigmoid as our activation function to output the probability as an output before thresholding our final answer.
 
 
 # Results
