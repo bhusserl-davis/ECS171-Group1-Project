@@ -79,7 +79,7 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
 ```
 The first layer of the model is the embedding layer, we create a convert matrix,  to covert what we've tokennized to different vectors ( at this point, we have already use tokenized each word to a number (ex. and -> 1, the -> 2, to -> 3.etc). 
-The `get_weight_matrix` function will create a matrix which maps 1 -> the vector which  word "and" being convert by word2vec model.
+The `get_weight_matrix` function will create a matrix which maps 1 -> the vector that the word "and" was converted to by word2vec model.
 ```
 # we map the word's index (by tokenizer) to the word's vector (by word2vec model)
 def get_weight_matrix(model, vocab):
