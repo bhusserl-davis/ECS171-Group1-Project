@@ -118,6 +118,7 @@ After oversampling the fradulent entires, we can get 0.6 recall on the fradulent
 | accuracy         | 0.95           | 0.97           | 0.89                        | 0.98                  |
 
 We can also choose to undersample the non-fradulent data, we remove the non-fradulent data observations with NaN value first before we oversample it. Initally it seens to produce poor accuracy, but after more epochs it also achieves higher accuracy and recall.
+
 ![alt text](https://github.com/bhusserl-davis/ECS171-Group1-Project/blob/main/Images/char_after_undersample.png?raw=true)
 
 |  LSTM model + remove Nan observation     | only tokenized + 6 epoches | only tokenized  + 60 epoches | using Word2Vec + 6 epoches | Word2Vec  + 60 epoches |
