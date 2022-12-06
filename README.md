@@ -18,7 +18,7 @@ Martin Wong: Coding for Description/Company Profile Model, Clean Nan, Writer
 
 
 # Abstract
-One way scammers target the vunerable is with fake job postings. Those that apply for these fake job positings are at risk of revealing their personal information to nefarious groups. An algorithm which could detect and remove these scams from job postings websites would be useful. Using a dataset which contains over 18,000 job descriptions, of which 800 are fake, we created a few machine learning models to predict whether they are fradulent. Since the data is mostly made up of natural language sentences, the data first needed to be cleaned and tokenized. This was done by setting all words to lowercase, removing punctuation and common stopwords, and then converting each string to an array of numerical values representing words. The first two model which were trained using only the description and company_profile column respectively each achieved an overall accuracy of 95% but with a very low recall of less than 10% for the fradulent class. Another model which did not remove stopwords and used Word2Vec and a LSTM layer achieved a better accuracy of 97% and recall of 50%. This model when combined with undersampling achieved a 95% accuracy with a 100% recall on the fraudulent class. The final and best model which utilized oversampling, Word2Vec, and LTSM achieved an overall accuracy of 99% with 100% recall on the fradulent class.
+One way scammers target the vunerable is with fake job postings. Those that apply for these fake job positings are at risk of revealing their personal information to nefarious groups. An algorithm which could detect and remove these scams from job postings websites would be useful. Using a dataset which contains over 18,000 job descriptions, of which 800 are fake, we created a few machine learning models to predict whether they are fradulent. Since the data is mostly made up of natural language sentences, the data first needed to be cleaned and tokenized. This was done by setting all words to lowercase, removing punctuation and common stopwords, and then converting each string to an array of numerical values representing words. The first two model which were trained using only the description and company_profile column respectively each achieved an overall accuracy of 96% but with a very low recall of less than 10% for the fradulent class. Another model which did not remove stopwords and used Word2Vec and a LSTM layer achieved a better accuracy of 97% and recall of 50%. This model when combined with undersampling achieved a 93% accuracy but with a 97% recall on the fraudulent class. The final and best model which utilized oversampling, Word2Vec, and LTSM achieved an overall accuracy of 98% with 60% recall on the fradulent class.
 
 # Methods
 ## Data Exploration
@@ -76,19 +76,15 @@ def get_weight_matrix(model, vocab):
     return weight_matrix
 ```
 
-
 # Results
-### Within testing the description model we were able to yield high accuracy, recall, precision, and f1-score. In the description model we have a 96% accuracy, 100% recall, 98% f1-score and 96% precision. The testing for the company profile model resulted in similar results where 96% accuracy, 100% recall, 98% f1-score and 96% precision. Both these models had similar accuracy, recall, f1-score, and precision to their respective training model.
+In the table below are the results from our five main models. For each, the recall of the non-fraudulent (0) class and fraudulent (1) class as well as overall accuracy are listed.
 
-### In the table below are the results from our five main models. For each, the recall on the fraudulent class as well as overall accuracy are listed.
+|  Metric    | only tokenized (Description) | only tokenized (company_profile) | using Word2Vec | Word2Vec + undersample | Word2Vec + oversample  |
+| ------     | ---------------------------- | -------------------------------- | -------------- | ---------------------- | ---------------------- |
+| recall (0) | 1.00                         | 1.00                             | 0.99           | 0.97                   | 0.99                    |
+| recall (1) | 0.00                         | 0.04                             | 0.50           | 0.67                   | 0.60                   |
+| accuracy   | 0.96                         | 0.96                             | 0.97           | 0.93                   | 0.98                   |
 
-|  Metric  | only tokenized (Description) | only tokenized (company_profile) | using Word2Vec | Word2Vec + undersample | Word2Vec + oversample  |
-| ------   | ---------------------------- | -------------------------------- | -------------- | ---------------------- | ---------------------- |
-| recall   | 0.01                         | 0.09                             | 0.5            | 1.0                    | 1.0                    |
-| accuracy | 0.96                         | 0.95                             | 0.97           | 0.95                   | 0.99                   |
-<!-- >>>>>>> 2b9b2970ce6b0ecf0e616076764b6aecc033e55c -->
-
-### To increase the models classification score, we decided to oversample and undersample the dataset for a model. In the table above, as a result of oversampling the data which increased the amount of false jobs allowed for the model to reach a higher accuracy score. We also tried undersampling the data to understand the influence it would have on our model. Upon undersampling the model we yielded a slightly lower accuracy and this could have happened as a result of lessening our data.
 # Discussion
 The description and company profile neural network models have a very low recall for fraudulent predictions, this implies that their high accuracy is a result of prediciting non-fradulent nearly every time. In fact, these models correctly predicted fradulent entries with less than 10% success. This could be due to the comparatively small amount of fraudulent entries there are to train on since the dataset consists of 95% true job entries. 
 
