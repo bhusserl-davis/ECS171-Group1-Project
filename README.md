@@ -58,14 +58,28 @@ The next step was building a model. We started the first model to be relatively 
 The model would then be fitted using the description data and the company profile data. The two models would then predict the class based on the x_test adata and the outputted result would be converted to binary values with a threshold of 0.5 because the y_test consists of binary values. We then printed the accuracy and classification report for description and company profile data.
 
 ## LSTM Model With word2Vec to encode the string
+### Word2Vec encoding
 ch will convert each word to a vector. The words has similar meaning will near to each other in the space, and the vector's direction will show the relationship of words
 ```
 # initialize & training our word2vec model
 w2v_model = gensim.models.Word2Vec(sentence,min_count=1,size=100)
 ```
-- because we are going to add embedding layer in the model, so we need to create a convert matrix which will use in embedding layer
-- to create the convert matrix, we need to first using tokenizer to convert each word to a number (ex. and -> 1, the -> 2, to -> 3.etc)
-- and the `get_weight_matrix` function will create a matrix which map 1->the vector which  word "and" being convert by word2vec mode
+
+### RNN v.s. LSTM
+When we understand the meaning of a sentence, to understand each word of the sentence in isolation is not enough, we need to deal with the whole context and how those word connected. Normal NN can only deal with each input at a time. RNN will base on the new information and last time's outcome to generate new outcome, but it cannot remember the information that is too long ago.
+LTSM is a special kind of Recurrent Neural Network(RNN), LTSM will learn what information need to save, and what should forget.
+```
+#Defining Neural Network
+model = Sequential()
+#Non-trainable embeddidng layer
+model.add(Embedding(vocab_size, output_dim=EMBEDDING_DIM, weights=[embedding_vectors], input_length=maxlen, trainable=False))
+#LSTM 
+model.add(LSTM(units=128))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
+```
+The first layer of the model is embedding layer, we create a convert matrix,  to covert tokennize to vector( we already use tokenizer to convert each word to a number (ex. and -> 1, the -> 2, to -> 3.etc). 
+The `get_weight_matrix` function will create a matrix which map 1->the vector which  word "and" being convert by word2vec model.
 ```
 # mapped the word's index (by tokenizer) to the word's vector (by word2vec model)
 def get_weight_matrix(model, vocab):
@@ -74,16 +88,22 @@ def get_weight_matrix(model, vocab):
     for word, i in vocab.items():
         weight_matrix[i] = model.wv[word]
     return weight_matrix
+ 
+embedding_vectors = get_weight_matrix(w2v_model, word_index)
 ```
+In the second layer, we tried RNN layer and LTSM, in both model we use 128 units.
+In the third layer, we use sigmoid as our activation function.
+
 
 # Results
 In the table below are the results from our five main models. For each, the recall of the non-fraudulent (0) class and fraudulent (1) class as well as overall accuracy are listed.
 
-|  Metric    | only tokenized (Description) | only tokenized (company_profile) | using Word2Vec | Word2Vec + undersample | Word2Vec + oversample  |
-| ------     | ---------------------------- | -------------------------------- | -------------- | ---------------------- | ---------------------- |
-| recall (0) | 1.00                         | 1.00                             | 0.99           | 0.97                   | 0.99                    |
-| recall (1) | 0.00                         | 0.04                             | 0.50           | 0.67                   | 0.60                   |
-| accuracy   | 0.96                         | 0.96                             | 0.97           | 0.93                   | 0.98                   |
+|  Metric   | only tokenized (Description) | only tokenized (company_profile) | oversample + Word2Vec | oversample + Word2Vec + RNN | oversample + Word2Vec + LTSM |
+| ------     | ---------------------------- | ------------------------------- | --------------------- | --------------------------- | --------------------------- |
+| recall (0) | 1.00                         | 1.00                            | 0.93                  | 0.62                        | 0.66 |
+| recall (1) | 0.00                         | 0.04                            | 0.51                  | 0.97                        | 0.98 |
+| accuracy   | 0.96                         | 0.96                            | 0.92                  | 0.98                        | 0.99 |
+
 
 # Discussion
 The description and company profile neural network models have a very low recall for fraudulent predictions, this implies that their high accuracy is a result of prediciting non-fradulent nearly every time. In fact, these models correctly predicted fradulent entries with less than 10% success. This could be due to the comparatively small amount of fraudulent entries there are to train on since the dataset consists of 95% true job entries. 
@@ -94,15 +114,17 @@ After oversampling the fradulent entires, we can get 0.6 recall on the fradulent
 
 |  LSTM model      | only tokenized | using Word2Vec | only tokenized + oversample | Word2Vec + oversample |
 | ---------------  | -------------- | -------------- | --------------------------- | --------------------- |
-| recall           | 0.01           | 0.5            | 0.51                        | 0.6                   |
+| recall (1)       | 0.01           | 0.5            | 0.51                        | 0.6                   |
 | accuracy         | 0.95           | 0.97           | 0.89                        | 0.98                  |
 
-We can also choose to undersample the non-fradulent data, we remove the observations with NaN value first before we oversample it. Initally it seens to produce poor accuracy, but after more epochs it also achieves high accuracy and recall.
+We can also choose to undersample the non-fradulent data, we remove the non-fradulent data observations with NaN value first before we oversample it. Initally it seens to produce poor accuracy, but after more epochs it also achieves higher accuracy and recall.
+![alt text](https://github.com/bhusserl-davis/ECS171-Group1-Project/blob/main/Images/char_after_undersample.png?raw=true)
 
-|  LSTM model + remove Nan observation     | only tokenized + 6 epoches | using Word2Vec + 6 epoches | only tokenized  + 60 epoches | Word2Vec  + 60 epoches |
+|  LSTM model + remove Nan observation     | only tokenized + 6 epoches | only tokenized  + 60 epoches | using Word2Vec + 6 epoches | Word2Vec  + 60 epoches |
 | ---------------------------------------  | -------------------------- | -------------------------- | ---------------------------- | ---------------------- |
-| recall                                   | 0.76                       | 0.60                       | 0.79                         | 0.67                    |
-| accuracy                                 | 0.78                       | 0.63                       | 0.93                         | 0.93                   |
+| recall (0)                               | 0.50                       | 0.79                       | 0.77                         | 0.79                   |
+| recall (1)                               | 0.78                       | 0.81                       | 0.71                         | 0.76                   |
+| accuracy                                 | 0.66                       | 0.80                       | 0.74                         | 0.77                   |
 
 This shows that the amount of training data is also important, but if we don't have enough data, we can use more training epochs to make up for it.
 
